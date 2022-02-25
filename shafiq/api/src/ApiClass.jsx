@@ -9,10 +9,11 @@ export const getAllProduct = async () => {
   }
 };
 
-export const getProductDetailsById = (data) => {
-  fetch(`https://fakestoreapi.com/products/${data.id}`)
-    .then((res) => res.json())
-    .then((json) => {
-      return json;
-    });
+export const getProductDetails = async (data) => {
+  try {
+    const { data } = await axios.get(`https://fakestoreapi.com/products/${data.id}`);
+    return data;
+  } catch (err) {
+    throw new Error(err);
+  }
 };
