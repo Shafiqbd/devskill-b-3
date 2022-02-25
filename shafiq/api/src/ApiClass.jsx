@@ -9,9 +9,9 @@ export const getAllProduct = async () => {
   }
 };
 
-export const getProductDetails = async (data) => {
+export const getProductDetails = async (id) => {
   try {
-    const { data } = await axios.get(`https://fakestoreapi.com/products/${data.id}`);
+    const { data } = await axios.get(`https://fakestoreapi.com/products/${id}`);
     return data;
   } catch (err) {
     throw new Error(err);

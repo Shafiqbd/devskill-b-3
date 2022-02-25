@@ -6,6 +6,7 @@ import CardMedia from "@mui/material/CardMedia";
 import { red } from "@mui/material/colors";
 import React, { useState } from "react";
 import styled from "styled-components";
+import { getProductDetails } from "./ApiClass";
 import ProductDetails from "./ProductDetails";
 
 const Title = styled.h1`
@@ -31,8 +32,12 @@ const CustGrid = styled(Grid)`
 const Product = ({ productList }) => {
   const [productDetails, setProductDetails] = useState(null);
 
-  const getProductDetails = (data) => {
-    setProductDetails(data);
+  const onClickProductDetails = async (id) => {
+    const product = await getProductDetails(id);
+    console.log("product", product);
+    if (product) {
+      setProductDetails(product);
+    }
   };
 
   return (
@@ -44,7 +49,7 @@ const Product = ({ productList }) => {
           <Title>Product List</Title>
           <Grid container spacing={4}>
             {productList.map((data, index) => (
-              <CustGrid item md={4} key={index} onClick={() => getProductDetails(data)}>
+              <CustGrid item md={4} key={index} onClick={() => onClickProductDetails(data.id)}>
                 <Card style={{ padding: "15px" }}>
                   <CardMedia component="img" height="194" image={data.image} alt={data.title[0]} />
                   <CardHeader
