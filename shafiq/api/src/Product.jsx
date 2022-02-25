@@ -30,8 +30,7 @@ const CustGrid = styled(Grid)`
 `;
 const Product = ({ productList }) => {
   const [productDetails, setProductDetails] = useState(null);
-  if (productList) {
-  }
+
   const getProductDetails = (data) => {
     setProductDetails(data);
   };
@@ -39,7 +38,7 @@ const Product = ({ productList }) => {
   return (
     <Container>
       {productDetails ? (
-        <ProductDetails productDetails={productDetails} />
+        <ProductDetails productDetails={productDetails} setProductDetails={setProductDetails} />
       ) : productList.length > 0 ? (
         <ProductWrap>
           <Title>Product List</Title>

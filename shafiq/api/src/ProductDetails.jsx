@@ -1,9 +1,10 @@
-import { Card, Grid } from "@mui/material";
+import { Button, Card, Grid } from "@mui/material";
 import React from "react";
 import styled from "styled-components";
 
-const Title = styled.h1`
-  margin: 30px 0px;
+const Title = styled.h2`
+  margin: 0;
+  padding-left: 20px;
 `;
 const ProductDetailsWrap = styled.div`
   & h1 {
@@ -30,11 +31,25 @@ const ProductDetailsWrap = styled.div`
     text-align: justify;
   }
 `;
-const ProductDetails = ({ productDetails }) => {
+const TitleWrap = styled.div`
+  display: flex;
+  align-items: center;
+  margin: 30px 0px;
+`;
+const ProductDetails = ({ productDetails, setProductDetails }) => {
   console.log("detais", productDetails);
+  const back = () => {
+    setProductDetails(null);
+  };
   return (
     <ProductDetailsWrap>
-      <Title>Product Details</Title>
+      <TitleWrap>
+        <Button variant="contained" onClick={back}>
+          Back
+        </Button>
+        <Title>Product Details</Title>
+      </TitleWrap>
+
       <Card style={{ padding: "15px" }}>
         {productDetails ? (
           <Grid container spacing={4}>
