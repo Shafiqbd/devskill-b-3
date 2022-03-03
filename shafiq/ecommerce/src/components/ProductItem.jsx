@@ -6,10 +6,13 @@ import CardMedia from "@mui/material/CardMedia";
 import { red } from "@mui/material/colors";
 import React from "react";
 import styled from "styled-components";
-import { getProductDetails } from "../utils/api";
+import { getCategoryByroduct, getProductDetails, getProductSorting } from "../utils/api";
+import SearchProduct from "./SearchProduct";
+import SortProduct from "./SortProduct";
 
 const Title = styled.h1`
   margin: 30px 0px;
+  width: 100%;
 `;
 const Loader = styled.h1`
   display: flex;
@@ -23,12 +26,24 @@ const ProductWrap = styled.div`
     font-weight: 700;
   }
 `;
+const ProductTitleFilter = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  & .product_filter {
+    width: 30%;
+  }
+  & .product_search {
+    width: 70%;
+    padding: 0 20px;
+  }
+`;
 const CustGrid = styled(Grid)`
   &:hover {
     cursor: pointer;
   }
 `;
-const ProductItem = ({ productList, setProductDetails }) => {
+const ProductItem = ({ productList, setProductDetails, setProductList }) => {
   const onClickProductDetails = async (id) => {
     const product = await getProductDetails(id);
     console.log("product", product);
@@ -36,13 +51,37 @@ const ProductItem = ({ productList, setProductDetails }) => {
       setProductDetails(product);
     }
   };
+  const getSortByProduct = async (sorting) => {
+    const productData = await getProductSorting(sorting);
+    console.log("product", productData);
+    if (productData) {
+      // setProductDetails(product);
+      setProductList(productData);
+    }
+  };
+  const getCategoryWiseProduct = async (category) => {
+    const productData = await getCategoryByroduct(category);
+    if (productData) {
+      setProductList(productData);
+    }
+  };
   return (
     <ProductWrap>
-      <Title>Product List</Title>
+      <ProductTitleFilter>
+        <Title>Product List</Title>
+        <div className="product_search">
+          <SearchProduct getCategoryWiseProduct={getCategoryWiseProduct} />
+        </div>
+        <div className="product_filter">
+          <SortProduct getSortByProduct={getSortByProduct} />
+        </div>
+      </ProductTitleFilter>
+
       <Grid container spacing={4}>
         {productList.map((data, index) => (
           <CustGrid item md={4} key={index} onClick={() => onClickProductDetails(data.id)}>
             <Card style={{ padding: "15px" }}>
+              <p>{data.category}</p>
               <CardMedia component="img" height="194" image={data.image} alt={data.title[0]} />
               <CardHeader
                 avatar={

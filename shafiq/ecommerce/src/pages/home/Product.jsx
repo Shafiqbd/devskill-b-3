@@ -24,15 +24,20 @@ const CustGrid = styled(Grid)`
     cursor: pointer;
   }
 `;
-const Product = ({ productList }) => {
+const Product = ({ productList, setProductList }) => {
   const [productDetails, setProductDetails] = useState(null);
 
   return (
     <Container>
       {productDetails ? (
-        <ProductDetails productDetails={productDetails} setProductDetails={setProductDetails} />
+        <ProductDetails
+          productDetails={productDetails}
+          setProductList={setProductList}
+          productList={productList}
+          setProductDetails={setProductDetails}
+        />
       ) : productList.length > 0 ? (
-        <ProductItem productList={productList} setProductDetails={setProductDetails} />
+        <ProductItem productList={productList} setProductList={setProductList} setProductDetails={setProductDetails} />
       ) : (
         <Loader>Loading...</Loader>
       )}
