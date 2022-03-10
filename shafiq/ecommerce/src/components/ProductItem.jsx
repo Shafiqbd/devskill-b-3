@@ -5,8 +5,9 @@ import CardHeader from "@mui/material/CardHeader";
 import CardMedia from "@mui/material/CardMedia";
 import { red } from "@mui/material/colors";
 import React from "react";
+import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
-import { getCategoryByroduct, getProductDetails, getProductSorting } from "../utils/api";
+import { getCategoryByroduct, getProductSorting } from "../utils/api";
 import SearchProduct from "./SearchProduct";
 import SortProduct from "./SortProduct";
 
@@ -43,12 +44,15 @@ const CustGrid = styled(Grid)`
     cursor: pointer;
   }
 `;
-const ProductItem = ({ productList, setProductDetails, setProductList }) => {
-  const onClickProductDetails = async (id) => {
-    const product = await getProductDetails(id);
-    console.log("product", product);
-    if (product) {
-      setProductDetails(product);
+const ProductItem = ({ productList, setProductList }) => {
+  const navigate = useNavigate();
+  const onClickProductDetails = async (id, i) => {
+    if (id) {
+      let data = {
+        id: id,
+        index: i,
+      };
+      navigate(`/productdetails/${JSON.stringify(data)}`, { replace: true });
     }
   };
   const getSortByProduct = async (sorting) => {
@@ -79,9 +83,9 @@ const ProductItem = ({ productList, setProductDetails, setProductList }) => {
 
       <Grid container spacing={4}>
         {productList.map((data, index) => (
-          <CustGrid item md={4} key={index} onClick={() => onClickProductDetails(data.id)}>
+          <CustGrid item md={4} key={index} onClick={() => onClickProductDetails(data.id, index)}>
             <Card style={{ padding: "15px" }}>
-              <p>{data.category}</p>
+              {/* <p>{data.category}</p> */}
               <CardMedia component="img" height="194" image={data.image} alt={data.title[0]} />
               <CardHeader
                 avatar={

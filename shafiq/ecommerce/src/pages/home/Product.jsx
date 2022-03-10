@@ -1,8 +1,8 @@
 import { Container, Grid } from "@mui/material";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import ProductItem from "../../components/ProductItem";
-import ProductDetails from "../product-details/ProductDetails";
+import { getAllProduct } from "../../utils/api";
 
 const Title = styled.h1`
   margin: 30px 0px;
@@ -24,20 +24,16 @@ const CustGrid = styled(Grid)`
     cursor: pointer;
   }
 `;
-const Product = ({ productList, setProductList }) => {
-  const [productDetails, setProductDetails] = useState(null);
+const Product = () => {
+  const [productList, setProductList] = useState([]);
+  useEffect(async () => {
+    setProductList(await getAllProduct());
+  }, []);
 
   return (
     <Container>
-      {productDetails ? (
-        <ProductDetails
-          productDetails={productDetails}
-          setProductList={setProductList}
-          productList={productList}
-          setProductDetails={setProductDetails}
-        />
-      ) : productList.length > 0 ? (
-        <ProductItem productList={productList} setProductList={setProductList} setProductDetails={setProductDetails} />
+      {productList.length > 0 ? (
+        <ProductItem productList={productList} setProductList={setProductList} />
       ) : (
         <Loader>Loading...</Loader>
       )}
