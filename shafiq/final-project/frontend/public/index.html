@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="icon" href="%PUBLIC_URL%/favicon.ico" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#000000" />
+    <meta name="description" content="Web site created using create-react-app" />
+    <link rel="apple-touch-icon" href="%PUBLIC_URL%/logo192.png" />
+    <!--
+      manifest.json provides metadata used when your web app is installed on a
+      user's mobile device or desktop. See https://developers.google.com/web/fundamentals/web-app-manifest/
+    -->
+    <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
+    <title>React App</title>
+
+    <!-- //for-mobile-apps -->
+    <link href="/assets/css/bootstrap.css" rel="stylesheet" type="text/css" media="all" />
+    <link href="/assets/css/style.css" rel="stylesheet" type="text/css" media="all" />
+    <link href="/assets/css/minicart.css" rel="stylesheet" type="text/css" media="all" />
+    <!-- font-awesome icons -->
+    <link href="/assets/css/font-awesome.css" rel="stylesheet" type="text/css" media="all" />
+    <!-- flexslider -->
+    <link rel="stylesheet" href="/assets/css/flexslider.css" type="text/css" media="screen" property="" />
+
+    <!-- js -->
+    <script src="/assets/js/jquery-1.11.1.min.js"></script>
+    <!-- start-smoth-scrolling -->
+    <script type="text/javascript" src="/assets/js/move-top.js"></script>
+    <script type="text/javascript" src="/assets/js/easing.js"></script>
+    <script src="/assets/js/bootstrap.min.js"></script>
+
+    <script type="text/javascript">
+      jQuery(document).ready(function ($) {
+        $(".scroll").click(function (event) {
+          event.preventDefault();
+          $("html,body").animate({ scrollTop: $(this.hash).offset().top }, 1000);
+        });
+      });
+    </script>
+  </head>
+  <body>
+    <noscript>You need to enable JavaScript to run this app.</noscript>
+    <div id="root">
+      <!-- <script>
+        const rootClickEvent = document.getElementById("root");
+        rootClickEvent.addEventListener("click", () => document.body.classList.remove("minicart-showing"));
+      </script> -->
+    </div>
+
+    <!-- here stars scrolling icon -->
+    <script type="text/javascript">
+      $(document).ready(function () {
+        $().UItoTop({ easingType: "easeOutQuart" });
+      });
+    </script>
+  </body>
+</html>
