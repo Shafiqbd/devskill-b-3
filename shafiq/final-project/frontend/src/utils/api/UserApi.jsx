@@ -17,7 +17,6 @@ export const userLogin = async (user) => {
 };
 export const addUserSignUp = async (signUp) => {
   try {
-    debugger
     const { data } = await FetchApi.post(`/signup`, {
       email: signUp.email,
       username: signUp.username,
@@ -34,7 +33,7 @@ export const addUserSignUp = async (signUp) => {
           long: signUp.geolocation ? signUp.geolocation.long : 0,
         },
       },
-      phone: signUp.phone
+      phone: signUp.phone,
     });
     return data;
   } catch (err) {

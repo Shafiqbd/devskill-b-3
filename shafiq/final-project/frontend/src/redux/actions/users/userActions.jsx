@@ -4,13 +4,13 @@ import { CHANGE_USER_INPUT, SET_LOGIN, SET_MESSAGE, SET_SIGNUP, SET_USER } from 
 
 export const userSignIn = (user) => async (dispatch) => {
   const signIn = await userLogin(user);
-  if(signIn != null){
+  if (signIn != null) {
     if (signIn && signIn.userInfo) {
       dispatch({
         type: SET_MESSAGE,
         payload: signIn,
       });
-  
+
       dispatch({
         type: SET_LOGIN,
         payload: signIn,
@@ -24,12 +24,11 @@ export const userSignIn = (user) => async (dispatch) => {
       toastr.error(signIn.message);
     }
   }
-  
 };
 
 export const userSignUp = (signUpData) => async (dispatch) => {
   const signUp = await addUserSignUp(signUpData);
-  debugger
+
   if (signUp) {
     dispatch({
       type: SET_SIGNUP,

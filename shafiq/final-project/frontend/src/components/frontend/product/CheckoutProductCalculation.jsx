@@ -1,7 +1,7 @@
 import React from "react";
 
 const CheckoutProductCalculation = ({ cartListData }) => {
-  const { products } = cartListData;
+  const products = cartListData ? cartListData.products : [];
   let total = 0;
   return (
     <ul>

@@ -3,7 +3,7 @@ import { GlobalVariable } from "../../../UtilityClass/ApiConnectionClass";
 
 const CheckoutTable = ({ cartListData }) => {
   const apiRootUrl = GlobalVariable.LOCAL_API_URL;
-  const { products } = cartListData;
+  const products = cartListData ? cartListData.products : [];
 
   return (
     <table className="timetable_sub">

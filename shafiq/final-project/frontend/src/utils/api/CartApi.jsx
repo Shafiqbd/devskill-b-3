@@ -29,7 +29,6 @@ export const addToCart = async (cartData) => {
 export const orderConfirm = async () => {
   authHeader();
   try {
-    debugger;
     const { data } = await FetchApi.get(`/order/checkout`);
     return data;
   } catch (err) {
