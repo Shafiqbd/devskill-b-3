@@ -51,12 +51,15 @@ const HeaderLoginDrop = () => {
       dispatch({
         type: CLEAR_MESSAGE,
       });
+      if (user?.userInfo.role === "admin") {
+        navigate("/login", { replace: true });
+      }
     }
   };
   return (
     <HeaderUserContent>
       <div className="user_content">
-        <h5>User</h5>
+        <h5>{user?.userInfo.role}</h5>
         <h6>{user?.userInfo.user}</h6>
       </div>
       <Action settings={settings} handelClickEvent={handelClickEvent} />

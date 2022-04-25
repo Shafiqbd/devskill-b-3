@@ -1,6 +1,6 @@
 import { toastr } from "react-redux-toastr";
-import { addUserSignUp, getAllUser, userLogin } from "../../../utils/api/UserApi";
-import { CHANGE_USER_INPUT, SET_LOGIN, SET_MESSAGE, SET_SIGNUP, SET_USER } from "../../contants/action-type";
+import { addUser, addUserSignUp, deleteUser, getAllUser, getUserDetails, updateUser, userLogin } from "../../../utils/api/UserApi";
+import { CHANGE_USER_INPUT, SET_LOGIN, SET_MESSAGE, SET_SIGNUP, SET_USER, SET_USER_DETAILS } from "../../contants/action-type";
 
 export const userSignIn = (user) => async (dispatch) => {
   const signIn = await userLogin(user);
@@ -34,7 +34,40 @@ export const userSignUp = (signUpData) => async (dispatch) => {
       type: SET_SIGNUP,
       payload: signUp,
     });
-    toastr.success(signUp.message);
+    toastr.success("Sign Up Save Successfully!!");
+  }
+};
+
+export const addUserInfo = (userData) => async (dispatch) => {
+  const user = await addUser(userData);
+
+  if (user) {
+    dispatch({
+      type: SET_SIGNUP,
+      payload: user,
+    });
+    toastr.success("User Save Successfully!!");
+  }
+};
+
+export const updateUserInfo = (userData, userId) => async (dispatch) => {
+  const user = await updateUser(userData, userId);
+
+  if (user) {
+    dispatch({
+      type: SET_SIGNUP,
+      payload: user,
+    });
+    dispatch(getAllUserList());
+    toastr.success("User Update Successfully!!");
+  }
+};
+
+export const getDeleteUser = (userId) => async (dispatch) => {
+  const user = await deleteUser(userId);
+  if (user) {
+    dispatch(getAllUserList());
+    toastr.success("User Delete Successfully!!");
   }
 };
 
@@ -46,8 +79,19 @@ export const getAllUserList = () => async (dispatch) => {
     payload: userList,
   });
 };
+export const getUserByUserId = (userId) => async (dispatch) => {
+  const userData = await getUserDetails(userId);
 
-export const handleInputChange = (event) => (dispatch) => {
+  if (userData) {
+    dispatch({
+      type: SET_USER_DETAILS,
+      payload: userData,
+    });
+  }
+  
+};
+
+export const handleUserInputChange = (event) => (dispatch) => {
   const { name, value } = event.target;
   const inputData = {
     name,

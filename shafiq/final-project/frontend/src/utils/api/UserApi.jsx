@@ -43,10 +43,90 @@ export const addUserSignUp = async (signUp) => {
 };
 
 // for access admin user
-export const getAllUser = async () => {
-  authHeader();
+export const addUser = async (userData) => {
   try {
+    authHeader();    
+    const { data } = await FetchApi.post(`/user`, {
+      email: userData.email,
+      username: userData.username,
+      password: userData.password,
+      role: userData.role,
+      phone: userData.phone,
+      address: {
+        city: userData.address.city,
+        street: userData.address.street,
+        number: userData.address.number,
+        zipcode: userData.address.zipcode,
+        geolocation: {
+          lat: userData.geolocation ? userData.geolocation.lat : 0,
+          long: userData.geolocation ? userData.geolocation.long : 0,
+        },
+      },
+      
+    });
+    return data;
+  } catch (err) {
+    toastr.error(err.message ?? err);
+    return null;
+  }
+};
+
+export const updateUser = async (userData, userId) => {
+  try {
+    authHeader();
+    const { data } = await FetchApi.patch(`/user/${userId}`, {
+      email: userData.email,
+      username: userData.username,
+      password: userData.password,
+      role: userData.role,
+      phone: userData.phone,
+      address: {
+        city: userData.address.city,
+        street: userData.address.street,
+        number: userData.address.number,
+        zipcode: userData.address.zipcode,
+        geolocation: {
+          lat: userData.geolocation ? userData.geolocation.lat : 0,
+          long: userData.geolocation ? userData.geolocation.long : 0,
+        },
+      },
+      
+    });
+    return data;
+  } catch (err) {
+    toastr.error(err.message ?? err);
+    return null;
+  }
+};
+
+
+export const getAllUser = async () => {
+  try {
+    authHeader();
     const { data } = await FetchApi.get(`/user`);
+    return data;
+  } catch (err) {
+    toastr.error(err.message ?? err);
+    return null;
+  }
+};
+export const getUserDetails = async (userId) => {
+  
+  try {
+    authHeader();
+    const { data } = await FetchApi.get(`/user/${userId}`);
+    return data;
+  } catch (err) {
+    toastr.error(err.message ?? err);
+    return null;
+  }
+};
+export const deleteUser = async (userId) => {
+  
+  try {
+    authHeader();
+    debugger
+    const { data } = await FetchApi.delete(`/user/${userId}`);
     return data;
   } catch (err) {
     toastr.error(err.message ?? err);

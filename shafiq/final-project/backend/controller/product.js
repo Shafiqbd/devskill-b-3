@@ -68,16 +68,15 @@ module.exports.addProduct = async (req, res) => {
                     message: "Category Not Found",
                 });
             }
+            const base64Info = req.body.image.split(";base64,");
+            const imageType = base64Info[0].split("data:image/")[1];
+            const base64Data = base64Info[1];
 
-            // const base64Info = req.body.image.split(";base64,");
-            // const imageType = base64Info[0].split("data:image/")[1];
-            // const base64Data = base64Info[1];
-
-            // if (!isBase64(base64Data)) {
-            //     return res.json({
-            //         message: "Invalid Image Data",
-            //     });
-            // }
+            if (!isBase64(base64Data)) {
+                return res.json({
+                    message: "Invalid Image Data",
+                });
+            }
 
             const uploadPath = process.cwd();
             const localPath = `${uploadPath}/uploads/`;
@@ -125,7 +124,22 @@ module.exports.editProduct = async (req, res) => {
         });
     } else {
         try {
-            let updatedProductData = {...productInputValue}
+            const cat = await Category.findOne({
+                _id: ObjectID(productInputValue.category._id),
+            });
+            if (!cat) {
+                return res.json({
+                    message: "Category Not Found",
+                });
+            }
+
+            let updatedProductData = {
+                ...productInputValue,
+                category: {
+                    _id: cat._id,
+                    name: cat.name,
+                }
+            }
             if(req.body.image){
                 const base64Info = req.body.image.split(";base64,");
                 const imageType = base64Info[0].split("data:image/")[1];

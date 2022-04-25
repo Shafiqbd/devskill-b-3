@@ -1,10 +1,22 @@
+//Product
 export const SET_PRODUCTS = "SET_PRODUCTS";
 export const GET_PRODUCTS_BY_ID = "GET_PRODUCTS_BY_ID";
 export const SET_DETAILS_PRODUCTS = "SET_DETAILS_PRODUCTS";
+export const CHANGE_PRODUCT_INPUT = "CHANGE_PRODUCT_INPUT";
+export const ADD_PRODUCT = "ADD_PRODUCT";
+export const EDIT_PRODUCT = "EDIT_PRODUCT";
+export const SET_PRODUCT_MODEL = "SET_PRODUCT_MODEL";
+export const REMOVE_PRODUCT_MODEL = "REMOVE_PRODUCT_MODEL";
+
 
 //Category
 export const SET_CATEGORY = "SET_CATEGORY";
 export const SET_SINGLE_CATEGORY = "SET_SINGLE_CATEGORY";
+export const CHANGE_CATEGORY_INPUT = "CHANGE_CATEGORY_INPUT";
+export const ADD_CATEGORY = "ADD_CATEGORY";
+export const EDIT_CATEGORY = "EDIT_CATEGORY";
+export const SET_CATEGORY_DETAILS = "SET_CATEGORY_DETAILS";
+export const REMOVE_CATEGORY = "REMOVE_CATEGORY";
 
 //cart
 export const SET_CART_LIST = "SET_CART_LIST";
@@ -17,7 +29,12 @@ export const SET_LOGIN = "SET_LOGIN";
 export const SET_USER = "SET_USER";
 export const CHANGE_USER_INPUT = "CHANGE_USER_INPUT";
 export const LOGOUT = "LOGOUT";
+export const REMOVE_USER_MODEL = "REMOVE_USER_MODEL";
+export const SET_USER_DETAILS = "SET_USER_DETAILS";
 
 //message
 export const SET_MESSAGE = "SET_MESSAGE";
 export const CLEAR_MESSAGE = "CLEAR_MESSAGE";
+
+//order
+export const SET_ORDER_LIST = "SET_ORDER_LIST";

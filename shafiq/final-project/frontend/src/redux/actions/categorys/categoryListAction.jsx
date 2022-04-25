@@ -1,5 +1,5 @@
-import { getAllCategoryList } from "../../../utils/api/CategoryApi";
-import { SET_CATEGORY, SET_SINGLE_CATEGORY } from "../../contants/action-type";
+import { getAllCategoryList, getCategoryDetails } from "../../../utils/api/CategoryApi";
+import { SET_CATEGORY, SET_CATEGORY_DETAILS, SET_SINGLE_CATEGORY } from "../../contants/action-type";
 
 export const setCategoryList = () => async (dispatch) => {
     
@@ -7,6 +7,14 @@ export const setCategoryList = () => async (dispatch) => {
     dispatch({
         type: SET_CATEGORY,
         payload: categoryList
+    })
+}
+export const setCategoryDetails = (categoryId) => async (dispatch) => {
+    
+    const category = await getCategoryDetails(categoryId);
+    dispatch({
+        type: SET_CATEGORY_DETAILS,
+        payload: category
     })
 }
 export const setSingleCategory = (category) => {    

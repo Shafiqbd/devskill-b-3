@@ -1,10 +1,10 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { setCategoryList, setSingleCategory } from '../../../redux/actions/categorys/categoryListAction';
 
 const Megamenu = () => {
-    const navigate = useNavigate();
+    // const navigate = useNavigate();
     const dispatch = useDispatch();
     const {categoryList} = useSelector(state=> state.categoryStore);
 
@@ -12,11 +12,11 @@ const Megamenu = () => {
         dispatch(setCategoryList());
     }, []);
 
-    const handelDetailsPage = (data) => {
-        navigate(`/${data._id}`);
-        dispatch(setSingleCategory(data));
+    // const handelProductPage = (data) => {
+    //     navigate(`/${data._id}`);
+    //     dispatch(setSingleCategory(data));
         
-    }
+    // }
 
 
   return (
@@ -37,7 +37,7 @@ const Megamenu = () => {
                             categoryList.map((item, index) => 
                             (
                                 <li key={index}>
-                                    <a onClick={() => handelDetailsPage(item)} className={(navInfo) => navInfo.isActive ? 'active' : ""}>{item.name}</a>                                    
+                                    <Link to={`/${item._id}`} onClick={() => dispatch(setSingleCategory(item))} className={(navInfo) => navInfo.isActive ? 'active' : "active"}>{item.name}</Link>                                    
                                 </li>
                             ))
                         }

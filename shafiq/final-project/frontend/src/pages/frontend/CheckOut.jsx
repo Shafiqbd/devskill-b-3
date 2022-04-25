@@ -1,11 +1,11 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { toastr } from "react-redux-toastr";
+import { useNavigate } from "react-router";
 import styled from "styled-components";
 import CheckoutProductCalculation from "../../components/frontend/product/CheckoutProductCalculation";
 import CheckoutTable from "../../components/frontend/product/CheckoutTable";
 import { orderCheckoutConfirm } from "../../redux/actions/carts/cartActions";
-import { toastr } from "react-redux-toastr";
-import { useNavigate } from "react-router";
 
 const CheckOutRow = styled.div`
   display: flex;
@@ -46,6 +46,7 @@ const CheckOut = () => {
   const { user } = useSelector((state) => state.storageStore);
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const products = cartListData ? cartListData.products : [];
 
   const handleConfirmOrder = () => {
     if (user && user.userInfo) {
@@ -65,9 +66,7 @@ const CheckOut = () => {
       </h3>
       <CheckOutRow>
         <div className="checkout-right">
-          <h4>
-            Your shopping cart contains: <span>3 Products</span>
-          </h4>
+          <h4>Your shopping cart contains: <span>{products.length} Products</span></h4>
           <CheckoutTable cartListData={cartListData} />
         </div>
 

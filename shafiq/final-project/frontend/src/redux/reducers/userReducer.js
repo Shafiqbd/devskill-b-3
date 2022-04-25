@@ -1,13 +1,15 @@
-import { CHANGE_USER_INPUT, SET_SIGNUP, SET_USER } from "../contants/action-type";
+import { CHANGE_USER_INPUT, REMOVE_USER_MODEL, SET_SIGNUP, SET_USER, SET_USER_DETAILS } from "../contants/action-type";
 
 const initialState = {
   userList: [],
   userData: {
+    _id: "",
     email: "",
     username: "",
     password: "",
     firstname: "",
     lastname: "",
+    role: "",
     address: {
       city: "",
       street: "",
@@ -22,15 +24,45 @@ export const userReducers = (state = initialState, { payload, type }) => {
     case SET_USER:
       return { ...state, userList: payload };
       break;
+    case SET_USER_DETAILS:
+      return { ...state, userData: payload };
+      break;
     case SET_SIGNUP:
       return { 
         ...state, 
         userData: {
+          _id: "",
           email: "",
           username: "",
           password: "",
           firstname: "",
           lastname: "",
+          role: "",
+          address: {
+            city: "",
+            street: "",
+            number: "",
+            zipcode: "",
+            geolocation: {
+              lat: 0,
+              long: 0,
+            },
+          },
+          phone: "",
+        }
+      };
+      break;
+    case REMOVE_USER_MODEL:
+      return { 
+        ...state, 
+        userData: {
+          _id: "",
+          email: "",
+          username: "",
+          password: "",
+          firstname: "",
+          lastname: "",
+          role: "",
           address: {
             city: "",
             street: "",

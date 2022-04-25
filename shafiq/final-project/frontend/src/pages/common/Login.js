@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router";
 import styled from "styled-components";
-import { handleInputChange, userSignIn, userSignUp } from "../../redux/actions/users/userActions";
+import { handleUserInputChange, userSignIn, userSignUp } from "../../redux/actions/users/userActions";
 
 const LoginArea = styled.div``;
 
@@ -28,7 +28,7 @@ const Login = () => {
       if (response?.userInfo.role === "user") {
         navigate("/", { replace: true });
       } else if (response?.userInfo.role === "admin") {
-        navigate("/dashboard", { replace: true });
+        navigate("/admin", { replace: true });
       }
     }
   }, [response]);
@@ -59,11 +59,11 @@ const Login = () => {
   return (
     <LoginArea>
       <div className="w3_login">
-        <h3>Login {'&'} Sign Up</h3>
+        <h3>Login {"&"} Sign Up</h3>
         <div className="w3_login_module">
           <div className="module form-module">
             <div className="toggle" id="toggle" onClick={handleToggle}>
-              <i className={toggleName === "Sign Up" ? "fa fa-pencil" : "fa fa-times"} ></i>
+              <i className={toggleName === "Sign Up" ? "fa fa-pencil" : "fa fa-times"}></i>
               <div className="tooltip">{toggleName}</div>
             </div>
 
@@ -97,18 +97,19 @@ const Login = () => {
 
             <div className="form">
               <h2>Create an account</h2>
-              <form 
-              onSubmit={(e) => {
-                e.preventDefault();
-                dispatch(userSignUp(userData));
-              }}>
+              <form
+                onSubmit={(e) => {
+                  e.preventDefault();
+                  dispatch(userSignUp(userData));
+                }}
+              >
                 <div className="row">
                   <div className="col-lg-6">
                     <input
                       type="text"
                       name="firstname"
                       value={userData.firstname}
-                      onChange={(e) => dispatch(handleInputChange(e))}
+                      onChange={(e) => dispatch(handleUserInputChange(e))}
                       placeholder="First Name"
                       required
                     />
@@ -118,7 +119,7 @@ const Login = () => {
                       type="text"
                       name="lastname"
                       value={userData.lastname}
-                      onChange={(e) => dispatch(handleInputChange(e))}
+                      onChange={(e) => dispatch(handleUserInputChange(e))}
                       placeholder="Last Name"
                       required
                     />
@@ -128,7 +129,7 @@ const Login = () => {
                   type="text"
                   name="username"
                   value={userData.username}
-                  onChange={(e) => dispatch(handleInputChange(e))}
+                  onChange={(e) => dispatch(handleUserInputChange(e))}
                   placeholder="User Name"
                   required
                 />
@@ -136,7 +137,7 @@ const Login = () => {
                   type="email"
                   name="email"
                   value={userData.email}
-                  onChange={(e) => dispatch(handleInputChange(e))}
+                  onChange={(e) => dispatch(handleUserInputChange(e))}
                   placeholder="Email"
                   required
                 />
@@ -144,7 +145,7 @@ const Login = () => {
                   type="password"
                   name="password"
                   value={userData.password}
-                  onChange={(e) => dispatch(handleInputChange(e))}
+                  onChange={(e) => dispatch(handleUserInputChange(e))}
                   placeholder="Password"
                   required
                 />
@@ -152,7 +153,7 @@ const Login = () => {
                   type="text"
                   name="phone"
                   value={userData.phone}
-                  onChange={(e) => dispatch(handleInputChange(e))}
+                  onChange={(e) => dispatch(handleUserInputChange(e))}
                   placeholder="Phone"
                 />
                 <div className="row">
@@ -161,8 +162,8 @@ const Login = () => {
                       type="text"
                       name="city"
                       value={userData.address.city}
-                      onChange={(e) => dispatch(handleInputChange(e))}
-                      placeholder="City"                      
+                      onChange={(e) => dispatch(handleUserInputChange(e))}
+                      placeholder="City"
                     />
                   </div>
                   <div className="col-lg-6">
@@ -170,8 +171,8 @@ const Login = () => {
                       type="text"
                       name="street"
                       value={userData.address.street}
-                      onChange={(e) => dispatch(handleInputChange(e))}
-                      placeholder="Street"                      
+                      onChange={(e) => dispatch(handleUserInputChange(e))}
+                      placeholder="Street"
                     />
                   </div>
                   <div className="col-lg-6">
@@ -179,8 +180,8 @@ const Login = () => {
                       type="text"
                       name="number"
                       value={userData.address.number}
-                      onChange={(e) => dispatch(handleInputChange(e))}
-                      placeholder="Number"                      
+                      onChange={(e) => dispatch(handleUserInputChange(e))}
+                      placeholder="Number"
                     />
                   </div>
                   <div className="col-lg-6">
@@ -188,8 +189,8 @@ const Login = () => {
                       type="text"
                       name="zipcode"
                       value={userData.address.zipcode}
-                      onChange={(e) => dispatch(handleInputChange(e))}
-                      placeholder="Zipcode"                      
+                      onChange={(e) => dispatch(handleUserInputChange(e))}
+                      placeholder="Zipcode"
                     />
                   </div>
                 </div>

@@ -31,7 +31,7 @@ const MiniCart = () => {
               <CartItem itemData={item} key={index} />
             ))}
           </ul>
-          <div className="minicart-footer">
+          <div className="minicart-footer" style={{width: '100%'}}>
             <button className="minicart-submit" type="button" onClick={handleCheckout}>
               Check Out with
             </button>

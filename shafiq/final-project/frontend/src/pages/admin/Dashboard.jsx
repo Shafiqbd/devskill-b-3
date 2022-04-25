@@ -4,7 +4,7 @@ import ChevronRightIcon from "@mui/icons-material/ChevronRight";
 import MenuIcon from "@mui/icons-material/Menu";
 import ProductionQuantityLimitsIcon from "@mui/icons-material/ProductionQuantityLimits";
 import ViewListIcon from "@mui/icons-material/ViewList";
-import { Grid } from "@mui/material";
+import { Grid, Typography } from "@mui/material";
 import MuiAppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
 import Divider from "@mui/material/Divider";
@@ -19,10 +19,11 @@ import Toolbar from "@mui/material/Toolbar";
 import * as React from "react";
 import { NavLink, Outlet } from "react-router-dom";
 import style from "styled-components";
+import HeaderLoginDrop from "../../components/frontend/header/HeaderLoginDrop";
 const drawerWidth = 220;
 
 const DashboardWrap = style.div`
-& .MuiToolbar-gutters{
+& .cust-topbar{
   background-color: #0c5154 !important;
 }
   & .main-menu{
@@ -132,6 +133,8 @@ export default function Dashboard(props) {
             >
               <MenuIcon />
             </IconButton>
+            <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}></Typography>
+            <HeaderLoginDrop />
           </Toolbar>
         </AppBar>
         <Drawer variant="permanent" open={open}>
@@ -162,7 +165,7 @@ export default function Dashboard(props) {
                 <ListItemText primary="Orders" sx={{ opacity: open ? 1 : 0 }} />
               </ListItemButton>
             </NavLink>
-            <NavLink to="products" className="main-menu">
+            <NavLink to="product-list" className="main-menu">
               <ListItemButton
                 sx={{
                   minHeight: 48,
@@ -202,10 +205,30 @@ export default function Dashboard(props) {
                 <ListItemText primary="Categories" sx={{ opacity: open ? 1 : 0 }} />
               </ListItemButton>
             </NavLink>
+            <NavLink to="user-list" className="main-menu">
+              <ListItemButton
+                sx={{
+                  minHeight: 48,
+                  justifyContent: open ? "initial" : "center",
+                  px: 2.5,
+                }}
+              >
+                <ListItemIcon
+                  sx={{
+                    minWidth: 0,
+                    mr: open ? 3 : "auto",
+                    justifyContent: "center",
+                  }}
+                >
+                  <CategoryIcon className="icon" />
+                </ListItemIcon>
+                <ListItemText primary="Users" sx={{ opacity: open ? 1 : 0 }} />
+              </ListItemButton>
+            </NavLink>
           </List>
           <Divider />
         </Drawer>
-        <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
+        <Box component="main" sx={{ flexGrow: 1, p: 5 }} style={{ marginTop: "45px" }}>
           <Grid container>
             <Grid item md={12}>
               <Outlet />

@@ -4,17 +4,40 @@ import { useParams } from "react-router-dom";
 import styled from "styled-components";
 import "../../assets/product.css";
 import ProductItem from "../../components/frontend/product/ProductItem";
+import SortProduct from "../../components/frontend/product/SortProduct";
 import { setProductList } from "../../redux/actions/products/productListAction";
 
 const ProductContent = styled.div`
   // padding: 0 !important;
 `;
+const ProductWrap = styled.div`
+  display: flex;
+  width: 100%;
+  align-items: center;
+  padding: 0 15px;
+  flex-wrap: wrap;
+`;
+const ProductTitleFilter = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  // padding-bottom: 20px;
+  width: 50%;
+  & .product_filter {
+    width: 50%;
+  }
+`;
 
 const ProductHeaderContent = styled.div`
+  width: 50%;
   & h3 {
     text-transform: uppercase;
     padding-bottom: 5px;
     font-size: 24px;
+    text-align: left;
+    :after{
+      left: 0;
+    }
   }
 `;
 
@@ -24,6 +47,7 @@ const ProductItemCol = styled.div`
 
 const Products = () => {
   const [hasMore, setHasMore] = useState(true);
+  const [sorting, setSorting] = React.useState("asc");
   const { id } = useParams();
   const dispatch = useDispatch();
   const { productList } = useSelector((state) => state.productStore);
@@ -31,8 +55,12 @@ const Products = () => {
   // const { user } = useSelector((state) => state.storageStore);
 
   useEffect(() => {
-    dispatch(setProductList(id));
+    dispatch(setProductList(id, sorting));
   }, [id]);
+
+  const getSortByProduct = (sortValue) => {    
+    dispatch(setProductList(id, sortValue));
+  };
 
   //// For pagination mathod
   // const fetchMoreData = async (e) => {
@@ -49,7 +77,16 @@ const Products = () => {
 
   return (
     <ProductContent className="w3ls_w3l_banner_nav_right_grid w3ls_w3l_banner_nav_right_grid_sub">
-      <ProductHeaderContent>{category ? <h3>{category.name}</h3> : <h3>All</h3>}</ProductHeaderContent>
+      <ProductWrap>
+        <ProductHeaderContent>{category ? <h3>{category.name}</h3> : <h3>All</h3>}</ProductHeaderContent>
+
+        <ProductTitleFilter>
+          <div className="product_filter">
+            <SortProduct getSortByProduct={getSortByProduct} sorting={sorting} setSorting={setSorting} />
+          </div>
+        </ProductTitleFilter>
+      </ProductWrap>
+      
 
       <div className="w3ls_w3l_banner_nav_right_grid1 w3ls_w3l_banner_nav_right_grid1_veg">
         {/* <InfiniteScroll

@@ -9,7 +9,6 @@ const AddToCartBtn = ({ productData }) => {
   const dispatch = useDispatch();
 
   const handleAddTocart = (data) => {
-    debugger;
     if (data && user && user.userInfo) {
       const cartData = {
         id: data._id,
